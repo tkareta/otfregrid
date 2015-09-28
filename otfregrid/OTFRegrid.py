@@ -65,14 +65,20 @@ class LMTOTFRegrid(object, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n =
     #    setattr(self, 'noiseweight', rmsweight)
         
     def jinc(self, x):
-        # I'm jury-rigging / hard coding this to work
-        # to test it
-        y = numpy.zeros(len(x))
-        if (x[0] == 0.0):
-            y[0] = 0.5
-            y[1:] = j1(x[1:]) / (x[1:])
+        # a 'jinc' function
+        if (len(x) == 1):
+            if (x == 0.0):
+                return 0.5
+            else:
+                return j1(x)/x
         else:
-            return j1(x) / x
+            y = numpy.zeros(len(x))
+            index_0 = numpy.where(x == 0.0)
+            index_not_0
+            y[index_0] = 0.5
+            y[index_not_0] = 
+
+            
         
     def make_weights(self):
         #case is a stand in for the case/switch thing
