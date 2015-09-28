@@ -8,7 +8,7 @@ from dreampy.lmtnetcdf import pynetcdf4
 
 
 
-class LMTOTFRegrid(object, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n = 25.0, RMAX = 3.0, biased=True) tsysweight=False, sigmaweight=True ):
+class LMTOTFRegrid(object, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n = 25.0, RMAX = 3.0, biased=True, tsysweight=False, sigmaweight=True ):
     def __init__(self):
         self.get_parameters()
         self.make_weights(1)
