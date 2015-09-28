@@ -18,10 +18,20 @@ class LMTOTFRegrid(object, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n =
         #self.make_grid()
         #self.create_netcdf()
     def make_filelist(self):
-       
+        # this finds the inputted filetype and then assigns some initial variables
+        
+        # this needs to be a literal list of string names of files for this
+        # check to work. more durable solution coming soon.
+
         setattr(self, 'filelist', filelist)
-        temp_otfscan = LMTOTFNetCDFFile(filelist[0])
-        setattr(self, 'nchan', temp_otfscan.hdu.header.nchan)
+        file_0 = filelist[0]
+        file_0_type = str.split(file_0)[1]
+        if (file_0_type == 'fits'):
+            setattr(self, 'filetype', 'fits')
+        if (file_0_type == 'nc'):
+            setattr(self, 'filetype', 'netcdf')
+            temp_otfscan = LMTOTFNetCDFFile(file_0)
+            setattr(self, 'nchan', temp_otfscan.hdu.header.nchan)
     
     def get_parameters(self):
         setattr(self, 'xmin', xmin)
