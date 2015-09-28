@@ -6,31 +6,49 @@ from collections import OrderedDict
 from netCDF4 import Dataset, Variable, _private_atts
 from dreampy.lmtnetcdf import pynetcdf4
 
-
-
-class LMTOTFRegrid(object, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n = 25.0, RMAX = 3.0, biased=True) tsysweight=False, sigmaweight=True ):
+class LMTOTFRegrid(object):
     def __init__(self):
-        self.get_parameters()
+        self.get_parameters(525.0, 535.0, 645.0, 655.0)
         self.make_weights(1)
-        self.get_reduc_prefs()
+        self.get_reduc_prefs(True)
         self.make_filelist()
         self.make_arrays()
         #self.make_grid()
         #self.create_netcdf()
     def make_filelist(self):
-       
+        # when I figure out how we're going to input
+        # the files into this class
+        # e.g. an OrderedDict or a list or a tuple..
+        # this will take it and make it into a specified
+        # format  - for now, I've made a temporary list
+
+        #one thing already settled is that the inputed
+        #files will be ___.nc files
+        
+        filelist = ['35065305.nc','35065304.nc','35065306.nc','35065300.nc','35065301.nc','35065302.nc','35065303.nc','35065307.nc','35065308.nc','35065309.nc']
         setattr(self, 'filelist', filelist)
         temp_otfscan = LMTOTFNetCDFFile(filelist[0])
         setattr(self, 'nchan', temp_otfscan.hdu.header.nchan)
     
-    def get_parameters(self):
+    def get_parameters(self, xmin, xmax, ymin, ymax, theta_n = 25.0, tsysweight=False, sigmaweight=True):
+        # this assigns some temporary values
+        # to xmax, xmin, ymax, ymin and theta_n
+        # which are the parameters specified by
+        # the user - (this is to come)
+        # more descriptions below in self.make_arrays()
         setattr(self, 'xmin', xmin)
         setattr(self, 'xmax', xmax)
         setattr(self, 'ymin', ymin)
         setattr(self, 'ymax', ymax)
         setattr(self, 'theta_n', theta_n)
-        setattr(self, 'RMAX', RMAX)
-
+        setattr(self, 'RMAX', 3.0)
+        #this changes the weighting in the
+        #regrid method to be temperature dependent
+        setattr(self, 'tsysweight', tsysweight)
+        setattr(self, 'sigmaweight', sigmaweight)
+        
+        # this part is in SetFITSHEADERS.c - I don't know if it is actually
+        # how crval2, crval3 are assigned
         i1 = abs(self.xmax) / (self.theta_n / 60.0)
         crval2 = 0.0
         if (self.xmax != 0.0):
@@ -41,7 +59,7 @@ class LMTOTFRegrid(object, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n =
             crval3 = i2 * (self.theta_n / 3600.0) * (abs(self.ymin) / self.ymin)
         setattr(self, 'crval2', crval2)
         setattr(self, 'crval3', crval3)
-    def get_reduc_prefs(self):
+    def get_reduc_prefs(self, biased):
         # the class method this is used for
         # expects the following:
         setattr(self, 'biased', biased) # true / false
@@ -64,7 +82,7 @@ class LMTOTFRegrid(object, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n =
         else:
             return j1(x) / x
         
-    def make_weights(self):
+    def make_weights(self, case):
         #case is a stand in for the case/switch thing
         #from C - I am not sure how the different cases
         #are triggered 
@@ -286,10 +304,3 @@ class LMTOTFRegrid(object, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n =
         var.__setattr__('ymin', self.ymin)
         
         newfile.close()
-
-
-
-
-if __name__ == "__main__":
-    files =  ['35065305.nc','35065304.nc','35065306.nc','35065300.nc','35065301.nc','35065302.nc','35065303.nc','35065307.nc','35065308.nc','35065309.nc']
-    otf = LMTOTFRegrid(525.0, 535.0, 645.0, 655.0, files)
