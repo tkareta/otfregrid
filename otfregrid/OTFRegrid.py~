@@ -1,6 +1,6 @@
 import numpy
 from scipy.special import j1
-from otfregrid.file_compatibility import LMTOTFNetCDFFile
+from LMTOTFFile import LMTOTFNetCDFFile
 from collections import OrderedDict
 
 from netCDF4 import Dataset, Variable, _private_atts
