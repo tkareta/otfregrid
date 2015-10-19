@@ -1,6 +1,6 @@
 import numpy
 from scipy.special import j1
-from otfregrid.file_compatibility import LMTOTFNetCDFFile
+from otfregrid.file_compatibility import LMTOTFFile
 from collections import OrderedDict
 
 from netCDF4 import Dataset, Variable, _private_atts
@@ -8,8 +8,8 @@ from dreampy.lmtnetcdf import pynetcdf4
 
 
 
-class LMTOTFRegrid(object, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n = 25.0, RMAX = 3.0, biased=True, tsysweight=False, sigmaweight=True ):
-    def __init__(self):
+class LMTOTFRegrid(object):
+    def __init__(self, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n = 25.0, RMAX = 3.0, biased=True, tsysweight=False, sigmaweight=True):
         self.get_parameters()
         self.make_weights(1)
         self.get_reduc_prefs()
@@ -76,7 +76,7 @@ class LMTOTFRegrid(object, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n =
             index_0 = numpy.where(x == 0.0)
             index_not_0
             y[index_0] = 0.5
-            y[index_not_0] = 
+            y[index_not_0] = j1(x[index_not_0])/x[index_not_0]
 
             
         
