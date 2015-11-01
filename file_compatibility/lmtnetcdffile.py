@@ -16,10 +16,10 @@ except ImportError:
     from pynetcdf import NetCDFFile
     
 #
-from dreampy.lmtheader import LMTHeader
-#from dreampy.lmtdata import LMTData
-from dreampy.lmtdata import LMTHoloData
-from dreampy.utils import OrderedDict
+from otfregrid.file_compatibility import LMTHeader
+
+from otfregrid.file_compatibility import LMTHoloData
+from otfregrid.file_compatibility import OrderedDict
 
 class LMThdu(object):
     """

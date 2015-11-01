@@ -1,9 +1,9 @@
 ### writen by Theodore Kareta, with major help from Dr. Gopal Narayanan
 import lmtnetcdffile
-from dreampy.lmtheader import LMTHeader
+from otfregrid.file_compatibility import LMTHeader
 import os
 from netCDF4 import _private_atts
-from dreampy.utils import DreampyGeneralError
+from otfregriderrors import otfregridfileerror
 from LMTOTFHeader import LMTOTFHeader_old
 from LMTOTFData import LMTOTFData_old
 import numpy
@@ -19,7 +19,7 @@ class LMTOTFNetCDFFile(LMTNetCDFFile):
             if os.path.exists(filename):
                 super(LMTOTFNetCDFFile, self).__init__(filename)
             else:
-                raise DreampyGeneralError("Does Not Exist", "File %s does not exist" % filename)
+                raise otfregridfileerror("Does Not Exist", "File %s does not exist" % filename)
         self._populate_headers(self.variables, self.dimensions)
         #self._reduce_data(weightmode=equal)
 
