@@ -1,10 +1,10 @@
 import numpy
 from scipy.special import j1
-from otfregrid.file_compatibility import LMTOTFFile
+from file_compatibility.LMTOTFFile import LMTOTFFile
 from collections import OrderedDict
 
 from netCDF4 import Dataset, Variable, _private_atts
-from dreampy.lmtnetcdf import pynetcdf4
+from file_compatibility import pynetcdf4
 
 
 

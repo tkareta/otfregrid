@@ -2,8 +2,8 @@ import numpy
 try:
     from netCDF4 import Variable as NetCDFVariable
 except ImportError:
-    from otfregrid.file_compatibility import NetCDFVariable
-from otfregrid.file_compatibility import OrderedNetCDFDict
+    from pynetcdf4 import NetCDFVariable
+from ordered_netcdf_dict import OrderedNetCDFDict
 
 class LMTHeader(OrderedNetCDFDict):
     """The most generic LMT Header class. This class is not usually

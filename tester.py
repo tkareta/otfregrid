@@ -1,2 +1,2 @@
-from otfregrid import OTFRegrid
+from otfregrid import LMTOTFRegrid
 

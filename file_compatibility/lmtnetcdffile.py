@@ -16,10 +16,10 @@ except ImportError:
     from pynetcdf import NetCDFFile
     
 #
-from otfregrid.file_compatibility import LMTHeader
+from lmtheader import LMTHeader
 
-from otfregrid.file_compatibility import LMTHoloData
-from otfregrid.file_compatibility import OrderedDict
+from file_compatibility import LMTHoloData
+from file_compatibility import OrderedDict
 
 class LMThdu(object):
     """
