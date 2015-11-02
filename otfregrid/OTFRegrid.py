@@ -1,9 +1,9 @@
 import numpy
 from scipy.special import j1
-from file_compatibility.LMTOTFFile import LMTOTFFile
+from file_compatibility import LMTOTFFile
 from collections import OrderedDict
 
-from netCDF4 import Dataset, Variable, _private_atts
+from netCDF4 import Dataset, Variable #, _private_atts
 from file_compatibility import pynetcdf4
 
 

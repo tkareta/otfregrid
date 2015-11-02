@@ -1,4 +1,4 @@
-from otfregrid.file_compatibility import LMTData
+from lmtdata import LMTData
 import numpy
 
 class LMTHoloData(LMTData):

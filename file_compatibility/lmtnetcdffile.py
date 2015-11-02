@@ -18,8 +18,8 @@ except ImportError:
 #
 from lmtheader import LMTHeader
 
-from file_compatibility import LMTHoloData
-from file_compatibility import OrderedDict
+from lmtholodata import LMTHoloData
+from ordered_dict import OrderedDict
 
 class LMThdu(object):
     """

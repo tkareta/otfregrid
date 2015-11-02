@@ -1,15 +1,15 @@
 ### writen by Theodore Kareta, with major help from Dr. Gopal Narayanan
-import lmtnetcdffile
-from otfregrid.file_compatibility import LMTHeader
+from lmtnetcdffile import LMTNetCDFFile
+from lmtheader import LMTHeader
 import os
-from netCDF4 import _private_atts
-from otfregriderrors import otfregridfileerror
+# from netCDF4 import _private_atts #fix this!
+from otfregrid_error import otfregridfileerror
 from LMTOTFHeader import LMTOTFHeader_old
 from LMTOTFData import LMTOTFData_old
 import numpy
 
 class LMTOTFNetCDFFile(LMTNetCDFFile):
-    _private_atts.extend(['old'])
+    #_private_atts.extend(['old'])
     def __init__(self, filename, mode='r',
                  old=True):
         self.old = old
