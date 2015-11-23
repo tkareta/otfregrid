@@ -1,6 +1,6 @@
 import numpy
 from scipy.special import j1
-from file_compatibility import LMTOTFFile
+from file_compatibility.LMTOTFFile import LMTOTFNetCDFFile
 from collections import OrderedDict
 
 from netCDF4 import Dataset, Variable #, _private_atts
@@ -10,9 +10,18 @@ from file_compatibility import pynetcdf4
 
 class LMTOTFRegrid(object):
     def __init__(self, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n = 25.0, RMAX = 3.0, biased=True, tsysweight=False, sigmaweight=True):
+        setattr(self, 'xmin', xmin)
+        setattr(self, 'xmax', xmax)
+        setattr(self, 'ymin', ymin)
+        setattr(self, 'ymax', ymax)
+        setattr(self, 'theta_n', theta_n)
+        setattr(self, 'RMAX', RMAX)
+        setattr(self, 'case', case)
+        setattr(self, 'biased', biased)
+        setattr(self, 'filelist', filelist)
         self.get_parameters()
-        self.make_weights(1)
-        self.get_reduc_prefs()
+        self.make_weights()
+        #self.get_reduc_prefs()
         self.make_filelist()
         self.make_arrays()
         #self.make_grid()
@@ -23,24 +32,18 @@ class LMTOTFRegrid(object):
         # this needs to be a literal list of string names of files for this
         # check to work. more durable solution coming soon.
 
-        setattr(self, 'filelist', filelist)
-        file_0 = filelist[0]
-        file_0_type = str.split(file_0)[1]
-        if (file_0_type == 'fits'):
+        #setattr(self, 'filelist', filelist)
+        file_0 = self.filelist[0]
+        file_type = (file_0.split('.'))[1]
+        if (file_type == 'fits'):
             setattr(self, 'filetype', 'fits')
-        if (file_0_type == 'nc'):
+        if (file_type == 'nc'):
             setattr(self, 'filetype', 'netcdf')
             temp_otfscan = LMTOTFNetCDFFile(file_0)
             setattr(self, 'nchan', temp_otfscan.hdu.header.nchan)
     
     def get_parameters(self):
-        setattr(self, 'xmin', xmin)
-        setattr(self, 'xmax', xmax)
-        setattr(self, 'ymin', ymin)
-        setattr(self, 'ymax', ymax)
-        setattr(self, 'theta_n', theta_n)
-        setattr(self, 'RMAX', RMAX)
-
+        
         i1 = abs(self.xmax) / (self.theta_n / 60.0)
         crval2 = 0.0
         if (self.xmax != 0.0):
@@ -51,10 +54,10 @@ class LMTOTFRegrid(object):
             crval3 = i2 * (self.theta_n / 3600.0) * (abs(self.ymin) / self.ymin)
         setattr(self, 'crval2', crval2)
         setattr(self, 'crval3', crval3)
-    def get_reduc_prefs(self):
+    #def get_reduc_prefs(self):
         # the class method this is used for
         # expects the following:
-        setattr(self, 'biased', biased) # true / false
+        #setattr(self, 'biased', biased) # true / false
         #setattr(self, 'tdep', tdep) # true / false
     
     #def get_convolve_weights(self, rmsweight, noiseweight):
@@ -74,9 +77,10 @@ class LMTOTFRegrid(object):
         else:
             y = numpy.zeros(len(x))
             index_0 = numpy.where(x == 0.0)
-            index_not_0
+            index_not_0 = numpy.where(x != 0.0)
             y[index_0] = 0.5
             y[index_not_0] = j1(x[index_not_0])/x[index_not_0]
+        return y
 
             
         
@@ -88,21 +92,21 @@ class LMTOTFRegrid(object):
         dx = self.RMAX / 256.0
         i = numpy.arange(256)
         x = dx * i
-        if (case == 1):
+        if (self.case == 1):
             # case 1
             weights[0] = numpy.exp(-1.0 * (2.0*x[0]/4.75)**2)
             weights[1:] = 2.0*self.jinc(6.28318531*(x[1:]) / 1.1) * numpy.exp(-1.0 * (2.0 * (x[1:]) / 4.75)**2) * 2.0*self.jinc(3.831706*(x[1:])/(self.RMAX))
-        if (case == 2):
+        if (self.case == 2):
             # case 2
             wt1 = numpy.zeros(256)
             wt1[0] = 1.0
             wt1[1:] = numpy.sin(6.28318531*(x[1:])/1.1)/(6.28318531*(x[1:])/1.1)
             weights = wt1 * numpy.exp(-1.0 * (2.0*x/4.75)**2)
-        if (case == 3):
+        if (self.case == 3):
             #case 3
             weights[0] = 1.0
             weights[1:] = numpy.sin(6.28318531*(x[1:])/1.1)/(6.28318531*(x[1:])/1.1)
-        if (case == 4):
+        if (self.case == 4):
             #case 4
             weights = numpy.exp(-2.77258872*(x**2))
         setattr(self, 'weights', weights)
