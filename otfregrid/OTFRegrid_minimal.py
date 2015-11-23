@@ -3,12 +3,12 @@
 import numpy
 from scipy.special import j1
 from collections import OrderedDict
-from netCDF4 import Dataset, Varaible
+from netCDF4 import Dataset, Variable
 
 
 class LMTOTFRegrid(object):
 # this class accepts a list of netCDF files
-an 3D Spectral Cube and
+# an 3D Spectral Cube and
     def __init__(self, xmin, xmax, ymin, ymax, filelist, case = 1, theta_n = 25.0, RMAX = 3.0, biased=True, tsysweight=False, sigmaweight=True):
         self.get_parameters()
         self.make_weights(1)
@@ -31,7 +31,7 @@ an 3D Spectral Cube and
         if (file_0_type == 'nc'):
             setattr(self, 'filetype', 'netcdf')
             temp_otfscan = Dataset(file_0)
-            setattr(self, 'nchan', temp_otfscan.variables['header.nchan']
+            setattr(self, 'nchan', temp_otfscan.variables['Header.OldOTF.nchan'][0])
     
     def get_parameters(self):
         setattr(self, 'xmin', xmin)
