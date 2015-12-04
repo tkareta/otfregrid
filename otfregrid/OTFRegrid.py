@@ -36,11 +36,12 @@ class LMTOTFRegrid(object):
         file_0 = self.filelist[0]
         file_type = (file_0.split('.'))[1]
         if (file_type == 'fits'):
-            setattr(self, 'filetype', 'fits')
+            self.filetype = 'fits'
         if (file_type == 'nc'):
-            setattr(self, 'filetype', 'netcdf')
-            temp_otfscan = LMTOTFNetCDFFile(file_0)
-            setattr(self, 'nchan', temp_otfscan.hdu.header.nchan)
+            self.filetype = 'netCDF'
+            print "File 0  is ", self.filelist[0]
+            temp_otfscan = LMTOTFNetCDFFile(self.filelist[0])
+            self.nchan = temp_otfscan.variables['nchan']
     
     def get_parameters(self):
         
