@@ -6,6 +6,9 @@ from collections import OrderedDict
 from netCDF4 import Dataset, Variable #, _private_atts
 from file_compatibility import pynetcdf4
 
+#new!
+import multiprocessing
+
 
 
 class LMTOTFRegrid(object):
@@ -41,7 +44,7 @@ class LMTOTFRegrid(object):
             self.filetype = 'netCDF'
             print "File 0  is ", self.filelist[0]
             temp_otfscan = LMTOTFNetCDFFile(self.filelist[0])
-            self.nchan = temp_otfscan.hdu.header.nchan)
+            self.nchan = temp_otfscan.hdu.header.nchan
     
     def get_parameters(self):
         
@@ -251,6 +254,7 @@ class LMTOTFRegrid(object):
                             self.T[jj + k] = 0.0
                             print k
     def make_grid(self):
+        jobs = []
         for filename in range(len(self.filelist)):
             otffile = LMTOTFNetCDFFile(self.filelist[filename])
             otffile._reduce_data(self.biased)
@@ -259,23 +263,9 @@ class LMTOTFRegrid(object):
 
             #print Z
             print self.filelist[filename]
-            #for idmp in range(otffile.hdu.header.nsample - 2):
-                #print idmp, "of", otffile.hdu.header.nsample - 2
-                # the C file checks if XOFF[idmp] < 21,600 here
-                # skipping that for now
-                #for ih in range(otffile.hdu.header.nhorns):
-                    #for k in range(otffile.hdu.header.nchan):
-                        # in the C code, here it runs 'checkMASK'
-                        # skipping that too, because we don't have
-                        # the masks (they're in a .x file?) [spooky]
-                    
-                        # then it runs 'WeightREF' - this just
-                        # makes the weights for reducing
-                        # the data dump
-                        # however: this is now a method of the
-                        # LMTOTFNetCDFFile class
-                        # (self._reduce_data())
-            self.convolve(otffile)
+            p = multiprocessing.Process(Target=self.convolve, args=otffile)
+            jobs.append(p)
+            p.start()
         self.normalize_grid()
         self.T = self.T.reshape((self.naxes2, self.naxes1, self.naxes0))
         self.create_netcdf()
