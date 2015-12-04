@@ -41,7 +41,7 @@ class LMTOTFRegrid(object):
             self.filetype = 'netCDF'
             print "File 0  is ", self.filelist[0]
             temp_otfscan = LMTOTFNetCDFFile(self.filelist[0])
-            self.nchan = temp_otfscan.variables['nchan']
+            self.nchan = temp_otfscan.hdu.header.nchan)
     
     def get_parameters(self):
         
