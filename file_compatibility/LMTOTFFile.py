@@ -2,7 +2,7 @@
 from lmtnetcdffile import LMTNetCDFFile
 from lmtheader import LMTHeader
 import os
-# from netCDF4 import _private_atts #fix this!
+from netCDF4 import _private_atts #fix this!
 from otfregrid_error import otfregridfileerror
 from LMTOTFHeader import LMTOTFHeader_old
 from LMTOTFData import LMTOTFData_old
@@ -12,7 +12,7 @@ class LMTOTFNetCDFFile(LMTNetCDFFile):
     #_private_atts.extend(['old'])
     def __init__(self, filename, mode='r',
                  old=True):
-        self.old = old
+        
         if mode == 'w':
             super(LMTOTFNetCDFFile, self).__init__(filename)
         else:
@@ -24,10 +24,7 @@ class LMTOTFNetCDFFile(LMTNetCDFFile):
         #self._reduce_data(weightmode=equal)
 
     def _populate_headers(self, variables, dimensions):
-        """
-        redefine the conventional _populate_headers method
-        for a holography specific header
-        """
+
         if self.old:
             return LMTOTFHeader_old(ncvariables=variables,
                                     dimensions=dimensions
