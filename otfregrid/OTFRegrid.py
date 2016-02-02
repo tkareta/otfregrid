@@ -22,12 +22,14 @@ class LMTOTFRegrid(object):
         setattr(self, 'case', case)
         setattr(self, 'biased', biased)
         setattr(self, 'filelist', filelist)
+        setattr(self, 'tsysweight', tsysweight)
+        setattr(self, 'sigmaweight', sigmaweight)
         self.get_parameters()
         self.make_weights()
         #self.get_reduc_prefs()
         self.make_filelist()
         self.make_arrays()
-        #self.make_grid()
+        self.make_grid()
         #self.create_netcdf()
     def make_filelist(self):
         # this finds the inputted filetype and then assigns some initial variables
@@ -263,9 +265,10 @@ class LMTOTFRegrid(object):
 
             #print Z
             print self.filelist[filename]
-            p = multiprocessing.Process(Target=self.convolve, args=otffile)
-            jobs.append(p)
-            p.start()
+            self.convolve(otffile)
+            #p = multiprocessing.Process(Target=self.convolve, args=otffile)
+            #jobs.append(p)
+            #p.start()
         self.normalize_grid()
         self.T = self.T.reshape((self.naxes2, self.naxes1, self.naxes0))
         self.create_netcdf()
