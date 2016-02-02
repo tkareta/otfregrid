@@ -9,10 +9,10 @@ from LMTOTFData import LMTOTFData_old
 import numpy
 
 class LMTOTFNetCDFFile(LMTNetCDFFile):
-    #_private_atts.extend(['old'])
+    _private_atts.extend(['old'])
     def __init__(self, filename, mode='r',
                  old=True):
-        
+        self.old = old
         if mode == 'w':
             super(LMTOTFNetCDFFile, self).__init__(filename)
         else:
