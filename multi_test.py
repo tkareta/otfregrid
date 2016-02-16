@@ -3,6 +3,7 @@ from multiprocessing import Pool
 import numpy
 from matplotlib import pyplot as plt
 import ctypes
+from functools import partial
 
 
 
@@ -15,7 +16,7 @@ class gridholder(object):
             self.grid = grid
             print grid
 
-def func(grid, n):
+def func(n, grid):
     #print inp
     #grid = inp[0]
     #n = inp[1]
@@ -31,9 +32,13 @@ def func(grid, n):
 if __name__=="__main__":
     plt.clf()
     g = gridholder()
-
+    func1 = partial(func, grid = g.grid)
     p = Pool(4)
-    func( g.grid, 100000)
+    pylist = numpy.ones(10, dtype = int)
+    
+    for i in range(len(pylist)):
+        func(g.grid,pylist[i])
+    
     p.close()
     p.join()
     plt.imshow(g.grid)

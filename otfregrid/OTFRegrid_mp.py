@@ -58,18 +58,7 @@ class LMTOTFRegrid_mp(object):
             crval3 = i2 * (self.theta_n / 3600.0) * (abs(self.ymin) / self.ymin)
         setattr(self, 'crval2', crval2)
         setattr(self, 'crval3', crval3)
-    #def get_reduc_prefs(self):
-        # the class method this is used for
-        # expects the following:
-        #setattr(self, 'biased', biased) # true / false
-        #setattr(self, 'tdep', tdep) # true / false
-    
-    #def get_convolve_weights(self, rmsweight, noiseweight):
-    #    # both of these should be 1 or 0
-    #    # I suspect they should be the same
-    #    # for all data that goes into the final map
-    #    setattr(self, 'rmsweight', rmsweight)
-    #    setattr(self, 'noiseweight', rmsweight)
+   
         
     def jinc(self, x):
         # a 'jinc' function
@@ -147,10 +136,8 @@ class LMTOTFRegrid_mp(object):
                             print k
     def make_grid(self):
         for i in range(len(self.filelist)):
-            t0, wt0, tsys0 = results = convolve_mp(self.filelist[i], self.biased, self.sigmaweight, self.tsysweight, self.RMAX, self.crval2, self.crval3, self.weights, self.naxes0, self.naxes1, self.naxes2, self.theta_n)
-            self.T += t0
-            self.WT += wt0
-            self.TSYS += tsys0
+            convolve_mp(self.filelist[i], self.biased, self.sigmaweight, self.tsysweight, self.RMAX, self.crval2, self.crval3, self.weights, self.naxes0, self.naxes1, self.naxes2, self.theta_n)
+            
         self.normalize_grid()
         self.T = self.T.reshape((self.naxes2, self.naxes1, self.naxes0))
         self.create_netcdf()

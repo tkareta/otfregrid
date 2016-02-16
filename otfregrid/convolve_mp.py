@@ -100,6 +100,6 @@ def convolve_mp(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, w
                         for k in range(naxes0):
                             if (filename.hdu.data.reduced[idmp, ih, k] < (10.0)**30):
                                 T[jj + k] += (wt*filename.hdu.data.reduced[idmp, ih, k])
-    return T, WT, TSYS
+
 
     
