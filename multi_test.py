@@ -14,33 +14,38 @@ class gridholder(object):
             grid = grid.reshape(10,10)
             print type(grid)
             self.grid = grid
-            print grid
+            #print grid
 
-def func(n, grid):
-    #print inp
-    #grid = inp[0]
-    #n = inp[1]
+def func(n):
+    global g
+    
     print n
     for i in range(n):
-        size = grid.shape
+        size = g.grid.shape
         c1 = numpy.random.randint(0, size[0])
         c2 = numpy.random.randint(0, size[1])
-        grid[c1,c2] += 1.0
+        print c1, c2
+        g.grid[c1,c2] += 1.0
         #print "wrote a point"
-
+    
+def callbackfunc(result):
+    global g
+    
+    g.grid += result
 
 if __name__=="__main__":
     plt.clf()
     g = gridholder()
-    func1 = partial(func, grid = g.grid)
+    results = []
+    #func1 = partial(func, grid = g.grid)
     p = Pool(4)
-    pylist = numpy.ones(10, dtype = int)
-    
-    for i in range(len(pylist)):
-        func(g.grid,pylist[i])
+    for i in range(1000):
+        p.apply_async(func, args=(i,))
     
     p.close()
     p.join()
+    
+    
     plt.imshow(g.grid)
     plt.colorbar()
     plt.show()

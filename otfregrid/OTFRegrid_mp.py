@@ -121,6 +121,7 @@ class LMTOTFRegrid_mp(object):
 
 
     def normalize_grid(self):
+        print "Starting Grid Normalization"
         for iy in range(int(self.naxes2)):
             for ix in range(int(self.naxes1)):
                 ii = ix + iy * self.naxes1
@@ -135,10 +136,25 @@ class LMTOTFRegrid_mp(object):
                             self.T[jj + k] = 0.0
                             print k
     def make_grid(self):
+        global T
+        global TSYS
+        global WT
+
+        T = self.T
+        TSYS = self.TSYS
+        WT = self.WT
+        
+        p = Pool(4)
         for i in range(len(self.filelist)):
-            convolve_mp(self.filelist[i], self.biased, self.sigmaweight, self.tsysweight, self.RMAX, self.crval2, self.crval3, self.weights, self.naxes0, self.naxes1, self.naxes2, self.theta_n)
-            
+            p.apply_async(convolve_mp_wrapper, args=(self.filelist[i], self.biased, self.sigmaweight, self.tsysweight, self.RMAX, self.crval2, self.crval3, self.weights, self.naxes0, self.naxes1, self.naxes2, self.theta_n,))
+        
+        p.close()
+        p.join()
+        self.T = T
+        self.WT = WT
+        self.TSYS = TSYS
         self.normalize_grid()
+        print "Grid normalized!"
         self.T = self.T.reshape((self.naxes2, self.naxes1, self.naxes0))
         self.create_netcdf()
 
@@ -170,7 +186,16 @@ class LMTOTFRegrid_mp(object):
         
         newfile.close()
 
+def convolve_mp_wrapper(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights, naxes0, naxes1, naxes2, theta_n):
+    global T
+    global TSYS
+    global WT
+    T_t, WT_t, TSYS_t = convolve_mp(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights, naxes0, naxes1, naxes2, theta_n)
+    print T_t.max()
+    T = T + T_t
+    WT = WT + WT_t
+    TSYS = TSYS + TSYS_t
 
-if __name__ == "__main__":
-    files =  ['35065305.nc','35065304.nc','35065306.nc','35065300.nc','35065301.nc','35065302.nc','35065303.nc','35065307.nc','35065308.nc','35065309.nc']
-    otf = LMTOTFRegrid(525.0, 535.0, 645.0, 655.0, files)
+#if __name__ == "__main__":
+    #files =  ['35065305.nc','35065304.nc','35065306.nc','35065300.nc','35065301.nc','35065302.nc','35065303.nc','35065307.nc','35065308.nc','35065309.nc']
+    #otf = LMTOTFRegrid(525.0, 535.0, 645.0, 655.0, files)
