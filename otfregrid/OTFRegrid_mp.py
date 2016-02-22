@@ -27,7 +27,7 @@ class LMTOTFRegrid_mp(object):
         #self.get_reduc_prefs()
         self.make_filelist()
         self.make_arrays()
-        self.make_grid()
+        #self.make_grid()
         #self.create_netcdf()
     def make_filelist(self):
         # this finds the inputted filetype and then assigns some initial variables

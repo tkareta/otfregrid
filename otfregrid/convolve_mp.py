@@ -1,6 +1,7 @@
 import numpy
 from file_compatibility.LMTOTFFile import LMTOTFNetCDFFile
 
+
 def convolve_mp(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights, naxes0, naxes1, naxes2, theta_n):
     filename = LMTOTFNetCDFFile(filename)
 
