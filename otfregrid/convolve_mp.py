@@ -1,18 +1,17 @@
 import numpy
 from file_compatibility.LMTOTFFile import LMTOTFNetCDFFile
 
-
 def convolve_mp(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights, naxes0, naxes1, naxes2, theta_n):
     filename = LMTOTFNetCDFFile(filename)
 
     # these arrays need to be shared in memory between
     # all of the processes writing to the output grid
-    #T = numpy.zeros(naxes0*naxes1*naxes2)    
-    #WT = numpy.zeros(naxes1*naxes2)
-    #TSYS = numpy.zeros(naxes1*naxes2)
-    global T
-    global WT
-    global TSYS
+    T = numpy.zeros(naxes0*naxes1*naxes2)    
+    WT = numpy.zeros(naxes1*naxes2)
+    TSYS = numpy.zeros(naxes1*naxes2)
+    #global T
+    #global WT
+    #global TSYS
 
     MAX_WT = numpy.ones(naxes1*naxes2) * (-1.0 * 10**30)
     INT_TIME = numpy.zeros(naxes1*naxes2)
@@ -108,6 +107,6 @@ def convolve_mp(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, w
                         for k in range(naxes0):
                             if (filename.hdu.data.reduced[idmp, ih, k] < (10.0)**30):
                                 T[jj + k] += (wt*filename.hdu.data.reduced[idmp, ih, k])
-    #return T, WT, TSYS
+    return T, WT, TSYS
 
     
