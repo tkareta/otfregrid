@@ -2,17 +2,10 @@ cimport numpy
 import numpy
 from file_compatibility.LMTOTFFile import LMTOTFNetCDFFile
 cimport cython
-import time
 
-@cython.boundscheck(False)
-@cython.wraparound(False)
-cpdef convolve_cy(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n):
-    
+
+def convolve_mc(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights, naxes0, naxes1, naxes2, theta_n):
     filename = LMTOTFNetCDFFile(filename)
-
-    cpdef numpy.ndarray[double, ndim=1] T
-    cpdef numpy.ndarray[double, ndim=1] WT
-    cpdef numpy.ndarray[double, ndim=1] TSYS
 
     # these arrays need to be shared in memory between
     # all of the processes writing to the output grid
@@ -22,16 +15,12 @@ cpdef convolve_cy(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3,
     #global T
     #global WT
     #global TSYS
-    
-    cpdef numpy.ndarray[double, ndim=1] MAX_WT
-    cpdef numpy.ndarray[double, ndim=1] INT_TIME
-    cpdef int nchan
+
     MAX_WT = numpy.ones(naxes1*naxes2) * (-1.0 * 10**30)
     INT_TIME = numpy.zeros(naxes1*naxes2)
     nchan = filename.hdu.header.nchan
-
     filename._reduce_data(biased)
-    
+
     if (sigmaweight):
         filename.baseline()
     if (tsysweight):
@@ -42,49 +31,28 @@ cpdef convolve_cy(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3,
             else:
                 wt1[ih] = 1.0
     else:
-	
         wt1 = 1.0
-
-
-    cpdef double clight
     clight = 2.99792458e10 #cm/s
 
     #in the future, we can just check what telescope it was from
     #and then assign a diameter value based on that
-    cpdef double D
     D = 1370.0 #FCRAO diameter in cm
-
-    cpdef int ic
     ic = int(filename.hdu.header.nchan / 2.0)
     if (filename.hdu.header.nchan > 128):
         ic = 505
-	
-    cpdef double dx
     dx = RMAX / 256.0
 
     # for all uses of XPOS and YPOS, I'm going to bump up the idmp index
     # by 1 - this is to compensate for them being also having the reference
     # positions as their 0th and last indices as well as the actual data in between
-    cpdef double XMAX
-    cpdef double YMIN
+
     XMAX = 60.0 * crval2 # in arcseconds? (crvals must be in arcminutes?)
     YMIN = 60.0 * crval3 # in arcseconds?
-
-    cpdef double lambda_D
     lambda_D = 206264.81 * (clight / filename.hdu.header.fsky / ((1.0e9))/ D)
     step = theta_n / lambda_D
 
-    cpdef double weight1, weight0, wt
-    cpdef double YBEG
-    cpdef int iybeg
-
-    cpdef double deltax, dx2
-    cpdef double deltay, rad2
-    cpdef int IS, ii
-    print "Starting to loop through data dumps:"
-    time1 = time.time()
     for idmp in range(filename.hdu.header.nsample - 2):
-        #print idmp, "of", filename.hdu.header.nsample - 2
+        print idmp, "of", filename.hdu.header.nsample - 2
         for ih in range(filename.hdu.header.nhorns):
             if (tsysweight):
                 weight1 = wt1[ih]
@@ -124,12 +92,12 @@ cpdef convolve_cy(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3,
                     rad2 = dx2 + deltay * deltay
                     #print rad2
                     if (rad2 < (RMAX * RMAX)):
-                        IS = (numpy.sqrt(rad2) / dx)
+                        IS = int(numpy.sqrt(rad2) / dx)
                         #print IS
                         weight0 = weights[IS]
                         wt = weight0 * weight1
                         #wt = 1.0 # temporary
-                        ii = (ix + iy * naxes1)
+                        ii = int(ix + iy * naxes1)
                         #print ii
                         WT[ii] += wt
                         TSYS[ii] += filename.hdu.header.tsys[ih] * wt
@@ -142,8 +110,7 @@ cpdef convolve_cy(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3,
                         for k in range(naxes0):
                             if (filename.hdu.data.reduced[idmp, ih, k] < (10.0)**30):
                                 T[jj + k] += (wt*filename.hdu.data.reduced[idmp, ih, k])
-    time2 = time.time()
-    print "took", (time2-time1)/60.0 , "minutes"
     return T, WT, TSYS
 
     
+def call
