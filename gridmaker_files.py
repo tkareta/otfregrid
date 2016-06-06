@@ -11,7 +11,7 @@ from convolve_cy import convolve_cy
 # As it stands currently, it can process approximately 4 files per 12
 # minute increment.
 
-def gridmaker_1c(xmin, xmax, ymin, ymax, filelist, cython=True):
+def gridmaker_files(xmin, xmax, ymin, ymax, filelist, cython=True):
     ### going to move the 'make_grid' function outside of the class
     ### for multiprocessing purposes? we'll see if it works
     #g = LMTOTFRegrid_mp(xmin, xmax, ymin, ymax, filelist)
@@ -64,6 +64,6 @@ def convolve_wrapper_cy(filename, biased, sigmaweight,tsysweight,RMAX, crval2, c
 
 if __name__ == "__main__":
     files = ['35065305.nc','35065304.nc','35065306.nc','35065300.nc','35065301.nc','35065302.nc','35065303.nc','35065307.nc','35065308.nc','35065309.nc']
-    grid = gridmaker_1c(525.0,535.0,645.0,655.0, files)
+    grid = gridmaker_files(525.0,535.0,645.0,655.0, files)
     
     

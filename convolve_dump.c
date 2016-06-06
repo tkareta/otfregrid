@@ -1165,7 +1165,7 @@ static CYTHON_INLINE char *__pyx_f_5numpy__util_dtypestring(PyArray_Descr *, cha
 /* Module declarations from 'cython' */
 
 /* Module declarations from 'convolve_dump' */
-static PyObject *__pyx_f_13convolve_dump_convolve_dump(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
+static PyObject *__pyx_f_13convolve_dump_convolve_dump(PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, PyObject *, int __pyx_skip_dispatch); /*proto*/
 static __Pyx_TypeInfo __Pyx_TypeInfo_double = { "double", NULL, sizeof(double), { 0 }, 0, 'R', 0, 0 };
 #define __Pyx_MODULE_NAME "convolve_dump"
 int __pyx_module_is_main_convolve_dump = 0;
@@ -1224,7 +1224,6 @@ static char __pyx_k_nhorns[] = "nhorns";
 static char __pyx_k_reduced[] = "reduced";
 static char __pyx_k_theta_n[] = "theta_n";
 static char __pyx_k_weights[] = "weights";
-static char __pyx_k_filename[] = "filename";
 static char __pyx_k_ValueError[] = "ValueError";
 static char __pyx_k_tsysweight[] = "tsysweight";
 static char __pyx_k_sigmaweight[] = "sigmaweight";
@@ -1251,7 +1250,6 @@ static PyObject *__pyx_n_s_crval2;
 static PyObject *__pyx_n_s_crval3;
 static PyObject *__pyx_n_s_end;
 static PyObject *__pyx_n_s_file;
-static PyObject *__pyx_n_s_filename;
 static PyObject *__pyx_n_s_fsky;
 static PyObject *__pyx_n_s_idmp;
 static PyObject *__pyx_n_s_import;
@@ -1283,7 +1281,7 @@ static PyObject *__pyx_kp_u_unknown_dtype_code_in_numpy_pxd;
 static PyObject *__pyx_n_s_weights;
 static PyObject *__pyx_n_s_wt1;
 static PyObject *__pyx_n_s_zeros;
-static PyObject *__pyx_pf_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_filename, PyObject *__pyx_v_biased, PyObject *__pyx_v_sigmaweight, PyObject *__pyx_v_tsysweight, PyObject *__pyx_v_RMAX, PyObject *__pyx_v_crval2, PyObject *__pyx_v_crval3, PyObject *__pyx_v_weights, PyObject *__pyx_v_naxes0, PyObject *__pyx_v_naxes1, PyObject *__pyx_v_naxes2, PyObject *__pyx_v_theta_n, PyObject *__pyx_v_nhorns, PyObject *__pyx_v_nchan, PyObject *__pyx_v_fsky, PyObject *__pyx_v_idmp, PyObject *__pyx_v_XPOS, PyObject *__pyx_v_YPOS, PyObject *__pyx_v_reduced, PyObject *__pyx_v_sigma, PyObject *__pyx_v_wt1, PyObject *__pyx_v_tsys); /* proto */
+static PyObject *__pyx_pf_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_biased, PyObject *__pyx_v_sigmaweight, PyObject *__pyx_v_tsysweight, PyObject *__pyx_v_RMAX, PyObject *__pyx_v_crval2, PyObject *__pyx_v_crval3, PyObject *__pyx_v_weights, PyObject *__pyx_v_naxes0, PyObject *__pyx_v_naxes1, PyObject *__pyx_v_naxes2, PyObject *__pyx_v_theta_n, PyObject *__pyx_v_nhorns, PyObject *__pyx_v_nchan, PyObject *__pyx_v_fsky, PyObject *__pyx_v_idmp, PyObject *__pyx_v_XPOS, PyObject *__pyx_v_YPOS, PyObject *__pyx_v_reduced, PyObject *__pyx_v_sigma, PyObject *__pyx_v_wt1, PyObject *__pyx_v_tsys); /* proto */
 static int __pyx_pf_5numpy_7ndarray___getbuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info, int __pyx_v_flags); /* proto */
 static void __pyx_pf_5numpy_7ndarray_2__releasebuffer__(PyArrayObject *__pyx_v_self, Py_buffer *__pyx_v_info); /* proto */
 static PyObject *__pyx_float_1_0;
@@ -1307,13 +1305,13 @@ static PyObject *__pyx_tuple__7;
 /* "convolve_dump.pyx":9
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * cpdef convolve_dump(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):             # <<<<<<<<<<<<<<
+ * cpdef convolve_dump(biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):             # <<<<<<<<<<<<<<
  *     print "starting a loop through a data dump"
  *     #filename = LMTOTFNetCDFFile(filename)
  */
 
 static PyObject *__pyx_pw_13convolve_dump_1convolve_dump(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyObject *__pyx_f_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *__pyx_v_filename, CYTHON_UNUSED PyObject *__pyx_v_biased, PyObject *__pyx_v_sigmaweight, PyObject *__pyx_v_tsysweight, PyObject *__pyx_v_RMAX, PyObject *__pyx_v_crval2, PyObject *__pyx_v_crval3, PyObject *__pyx_v_weights, PyObject *__pyx_v_naxes0, PyObject *__pyx_v_naxes1, PyObject *__pyx_v_naxes2, PyObject *__pyx_v_theta_n, PyObject *__pyx_v_nhorns, PyObject *__pyx_v_nchan, PyObject *__pyx_v_fsky, PyObject *__pyx_v_idmp, PyObject *__pyx_v_XPOS, PyObject *__pyx_v_YPOS, PyObject *__pyx_v_reduced, PyObject *__pyx_v_sigma, PyObject *__pyx_v_wt1, PyObject *__pyx_v_tsys, CYTHON_UNUSED int __pyx_skip_dispatch) {
+static PyObject *__pyx_f_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *__pyx_v_biased, PyObject *__pyx_v_sigmaweight, PyObject *__pyx_v_tsysweight, PyObject *__pyx_v_RMAX, PyObject *__pyx_v_crval2, PyObject *__pyx_v_crval3, PyObject *__pyx_v_weights, PyObject *__pyx_v_naxes0, PyObject *__pyx_v_naxes1, PyObject *__pyx_v_naxes2, PyObject *__pyx_v_theta_n, PyObject *__pyx_v_nhorns, PyObject *__pyx_v_nchan, PyObject *__pyx_v_fsky, PyObject *__pyx_v_idmp, PyObject *__pyx_v_XPOS, PyObject *__pyx_v_YPOS, PyObject *__pyx_v_reduced, PyObject *__pyx_v_sigma, PyObject *__pyx_v_wt1, PyObject *__pyx_v_tsys, CYTHON_UNUSED int __pyx_skip_dispatch) {
   PyArrayObject *__pyx_v_T = 0;
   PyArrayObject *__pyx_v_WT = 0;
   PyArrayObject *__pyx_v_TSYS = 0;
@@ -1423,7 +1421,7 @@ static PyObject *__pyx_f_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *_
 
   /* "convolve_dump.pyx":10
  * @cython.wraparound(False)
- * cpdef convolve_dump(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):
+ * cpdef convolve_dump(biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):
  *     print "starting a loop through a data dump"             # <<<<<<<<<<<<<<
  *     #filename = LMTOTFNetCDFFile(filename)
  * 
@@ -3055,7 +3053,7 @@ static PyObject *__pyx_f_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *_
   /* "convolve_dump.pyx":9
  * @cython.boundscheck(False)
  * @cython.wraparound(False)
- * cpdef convolve_dump(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):             # <<<<<<<<<<<<<<
+ * cpdef convolve_dump(biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):             # <<<<<<<<<<<<<<
  *     print "starting a loop through a data dump"
  *     #filename = LMTOTFNetCDFFile(filename)
  */
@@ -3118,7 +3116,6 @@ static PyObject *__pyx_f_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *_
 /* Python wrapper */
 static PyObject *__pyx_pw_13convolve_dump_1convolve_dump(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
 static PyObject *__pyx_pw_13convolve_dump_1convolve_dump(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
-  PyObject *__pyx_v_filename = 0;
   PyObject *__pyx_v_biased = 0;
   PyObject *__pyx_v_sigmaweight = 0;
   PyObject *__pyx_v_tsysweight = 0;
@@ -3147,13 +3144,12 @@ static PyObject *__pyx_pw_13convolve_dump_1convolve_dump(PyObject *__pyx_self, P
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("convolve_dump (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_filename,&__pyx_n_s_biased,&__pyx_n_s_sigmaweight,&__pyx_n_s_tsysweight,&__pyx_n_s_RMAX,&__pyx_n_s_crval2,&__pyx_n_s_crval3,&__pyx_n_s_weights,&__pyx_n_s_naxes0,&__pyx_n_s_naxes1,&__pyx_n_s_naxes2,&__pyx_n_s_theta_n,&__pyx_n_s_nhorns,&__pyx_n_s_nchan,&__pyx_n_s_fsky,&__pyx_n_s_idmp,&__pyx_n_s_XPOS,&__pyx_n_s_YPOS,&__pyx_n_s_reduced,&__pyx_n_s_sigma,&__pyx_n_s_wt1,&__pyx_n_s_tsys,0};
-    PyObject* values[22] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_biased,&__pyx_n_s_sigmaweight,&__pyx_n_s_tsysweight,&__pyx_n_s_RMAX,&__pyx_n_s_crval2,&__pyx_n_s_crval3,&__pyx_n_s_weights,&__pyx_n_s_naxes0,&__pyx_n_s_naxes1,&__pyx_n_s_naxes2,&__pyx_n_s_theta_n,&__pyx_n_s_nhorns,&__pyx_n_s_nchan,&__pyx_n_s_fsky,&__pyx_n_s_idmp,&__pyx_n_s_XPOS,&__pyx_n_s_YPOS,&__pyx_n_s_reduced,&__pyx_n_s_sigma,&__pyx_n_s_wt1,&__pyx_n_s_tsys,0};
+    PyObject* values[21] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     if (unlikely(__pyx_kwds)) {
       Py_ssize_t kw_args;
       const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
       switch (pos_args) {
-        case 22: values[21] = PyTuple_GET_ITEM(__pyx_args, 21);
         case 21: values[20] = PyTuple_GET_ITEM(__pyx_args, 20);
         case 20: values[19] = PyTuple_GET_ITEM(__pyx_args, 19);
         case 19: values[18] = PyTuple_GET_ITEM(__pyx_args, 18);
@@ -3181,118 +3177,113 @@ static PyObject *__pyx_pw_13convolve_dump_1convolve_dump(PyObject *__pyx_self, P
       kw_args = PyDict_Size(__pyx_kwds);
       switch (pos_args) {
         case  0:
-        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_filename)) != 0)) kw_args--;
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biased)) != 0)) kw_args--;
         else goto __pyx_L5_argtuple_error;
         case  1:
-        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_biased)) != 0)) kw_args--;
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_sigmaweight)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
-        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_sigmaweight)) != 0)) kw_args--;
+        if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_tsysweight)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
-        if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_tsysweight)) != 0)) kw_args--;
+        if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_RMAX)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  4:
-        if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_RMAX)) != 0)) kw_args--;
+        if (likely((values[4] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_crval2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 4); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  5:
-        if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_crval2)) != 0)) kw_args--;
+        if (likely((values[5] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_crval3)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 5); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 5); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  6:
-        if (likely((values[6] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_crval3)) != 0)) kw_args--;
+        if (likely((values[6] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_weights)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 6); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 6); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  7:
-        if (likely((values[7] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_weights)) != 0)) kw_args--;
+        if (likely((values[7] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_naxes0)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 7); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 7); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  8:
-        if (likely((values[8] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_naxes0)) != 0)) kw_args--;
+        if (likely((values[8] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_naxes1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 8); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 8); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  9:
-        if (likely((values[9] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_naxes1)) != 0)) kw_args--;
+        if (likely((values[9] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_naxes2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 9); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 9); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 10:
-        if (likely((values[10] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_naxes2)) != 0)) kw_args--;
+        if (likely((values[10] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_theta_n)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 10); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 10); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 11:
-        if (likely((values[11] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_theta_n)) != 0)) kw_args--;
+        if (likely((values[11] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nhorns)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 11); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 11); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 12:
-        if (likely((values[12] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nhorns)) != 0)) kw_args--;
+        if (likely((values[12] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nchan)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 12); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 12); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 13:
-        if (likely((values[13] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_nchan)) != 0)) kw_args--;
+        if (likely((values[13] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_fsky)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 13); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 13); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 14:
-        if (likely((values[14] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_fsky)) != 0)) kw_args--;
+        if (likely((values[14] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_idmp)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 14); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 14); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 15:
-        if (likely((values[15] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_idmp)) != 0)) kw_args--;
+        if (likely((values[15] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_XPOS)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 15); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 15); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 16:
-        if (likely((values[16] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_XPOS)) != 0)) kw_args--;
+        if (likely((values[16] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_YPOS)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 16); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 16); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 17:
-        if (likely((values[17] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_YPOS)) != 0)) kw_args--;
+        if (likely((values[17] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_reduced)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 17); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 17); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 18:
-        if (likely((values[18] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_reduced)) != 0)) kw_args--;
+        if (likely((values[18] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_sigma)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 18); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 18); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 19:
-        if (likely((values[19] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_sigma)) != 0)) kw_args--;
+        if (likely((values[19] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_wt1)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 19); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 19); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case 20:
-        if (likely((values[20] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_wt1)) != 0)) kw_args--;
+        if (likely((values[20] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_tsys)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 20); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
-        }
-        case 21:
-        if (likely((values[21] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_tsys)) != 0)) kw_args--;
-        else {
-          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, 21); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, 20); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
         if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "convolve_dump") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
-    } else if (PyTuple_GET_SIZE(__pyx_args) != 22) {
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 21) {
       goto __pyx_L5_argtuple_error;
     } else {
       values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
@@ -3316,47 +3307,45 @@ static PyObject *__pyx_pw_13convolve_dump_1convolve_dump(PyObject *__pyx_self, P
       values[18] = PyTuple_GET_ITEM(__pyx_args, 18);
       values[19] = PyTuple_GET_ITEM(__pyx_args, 19);
       values[20] = PyTuple_GET_ITEM(__pyx_args, 20);
-      values[21] = PyTuple_GET_ITEM(__pyx_args, 21);
     }
-    __pyx_v_filename = values[0];
-    __pyx_v_biased = values[1];
-    __pyx_v_sigmaweight = values[2];
-    __pyx_v_tsysweight = values[3];
-    __pyx_v_RMAX = values[4];
-    __pyx_v_crval2 = values[5];
-    __pyx_v_crval3 = values[6];
-    __pyx_v_weights = values[7];
-    __pyx_v_naxes0 = values[8];
-    __pyx_v_naxes1 = values[9];
-    __pyx_v_naxes2 = values[10];
-    __pyx_v_theta_n = values[11];
-    __pyx_v_nhorns = values[12];
-    __pyx_v_nchan = values[13];
-    __pyx_v_fsky = values[14];
-    __pyx_v_idmp = values[15];
-    __pyx_v_XPOS = values[16];
-    __pyx_v_YPOS = values[17];
-    __pyx_v_reduced = values[18];
-    __pyx_v_sigma = values[19];
-    __pyx_v_wt1 = values[20];
-    __pyx_v_tsys = values[21];
+    __pyx_v_biased = values[0];
+    __pyx_v_sigmaweight = values[1];
+    __pyx_v_tsysweight = values[2];
+    __pyx_v_RMAX = values[3];
+    __pyx_v_crval2 = values[4];
+    __pyx_v_crval3 = values[5];
+    __pyx_v_weights = values[6];
+    __pyx_v_naxes0 = values[7];
+    __pyx_v_naxes1 = values[8];
+    __pyx_v_naxes2 = values[9];
+    __pyx_v_theta_n = values[10];
+    __pyx_v_nhorns = values[11];
+    __pyx_v_nchan = values[12];
+    __pyx_v_fsky = values[13];
+    __pyx_v_idmp = values[14];
+    __pyx_v_XPOS = values[15];
+    __pyx_v_YPOS = values[16];
+    __pyx_v_reduced = values[17];
+    __pyx_v_sigma = values[18];
+    __pyx_v_wt1 = values[19];
+    __pyx_v_tsys = values[20];
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 22, 22, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("convolve_dump", 1, 21, 21, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("convolve_dump.convolve_dump", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13convolve_dump_convolve_dump(__pyx_self, __pyx_v_filename, __pyx_v_biased, __pyx_v_sigmaweight, __pyx_v_tsysweight, __pyx_v_RMAX, __pyx_v_crval2, __pyx_v_crval3, __pyx_v_weights, __pyx_v_naxes0, __pyx_v_naxes1, __pyx_v_naxes2, __pyx_v_theta_n, __pyx_v_nhorns, __pyx_v_nchan, __pyx_v_fsky, __pyx_v_idmp, __pyx_v_XPOS, __pyx_v_YPOS, __pyx_v_reduced, __pyx_v_sigma, __pyx_v_wt1, __pyx_v_tsys);
+  __pyx_r = __pyx_pf_13convolve_dump_convolve_dump(__pyx_self, __pyx_v_biased, __pyx_v_sigmaweight, __pyx_v_tsysweight, __pyx_v_RMAX, __pyx_v_crval2, __pyx_v_crval3, __pyx_v_weights, __pyx_v_naxes0, __pyx_v_naxes1, __pyx_v_naxes2, __pyx_v_theta_n, __pyx_v_nhorns, __pyx_v_nchan, __pyx_v_fsky, __pyx_v_idmp, __pyx_v_XPOS, __pyx_v_YPOS, __pyx_v_reduced, __pyx_v_sigma, __pyx_v_wt1, __pyx_v_tsys);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_filename, PyObject *__pyx_v_biased, PyObject *__pyx_v_sigmaweight, PyObject *__pyx_v_tsysweight, PyObject *__pyx_v_RMAX, PyObject *__pyx_v_crval2, PyObject *__pyx_v_crval3, PyObject *__pyx_v_weights, PyObject *__pyx_v_naxes0, PyObject *__pyx_v_naxes1, PyObject *__pyx_v_naxes2, PyObject *__pyx_v_theta_n, PyObject *__pyx_v_nhorns, PyObject *__pyx_v_nchan, PyObject *__pyx_v_fsky, PyObject *__pyx_v_idmp, PyObject *__pyx_v_XPOS, PyObject *__pyx_v_YPOS, PyObject *__pyx_v_reduced, PyObject *__pyx_v_sigma, PyObject *__pyx_v_wt1, PyObject *__pyx_v_tsys) {
+static PyObject *__pyx_pf_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_biased, PyObject *__pyx_v_sigmaweight, PyObject *__pyx_v_tsysweight, PyObject *__pyx_v_RMAX, PyObject *__pyx_v_crval2, PyObject *__pyx_v_crval3, PyObject *__pyx_v_weights, PyObject *__pyx_v_naxes0, PyObject *__pyx_v_naxes1, PyObject *__pyx_v_naxes2, PyObject *__pyx_v_theta_n, PyObject *__pyx_v_nhorns, PyObject *__pyx_v_nchan, PyObject *__pyx_v_fsky, PyObject *__pyx_v_idmp, PyObject *__pyx_v_XPOS, PyObject *__pyx_v_YPOS, PyObject *__pyx_v_reduced, PyObject *__pyx_v_sigma, PyObject *__pyx_v_wt1, PyObject *__pyx_v_tsys) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -3365,7 +3354,7 @@ static PyObject *__pyx_pf_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("convolve_dump", 0);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __pyx_f_13convolve_dump_convolve_dump(__pyx_v_filename, __pyx_v_biased, __pyx_v_sigmaweight, __pyx_v_tsysweight, __pyx_v_RMAX, __pyx_v_crval2, __pyx_v_crval3, __pyx_v_weights, __pyx_v_naxes0, __pyx_v_naxes1, __pyx_v_naxes2, __pyx_v_theta_n, __pyx_v_nhorns, __pyx_v_nchan, __pyx_v_fsky, __pyx_v_idmp, __pyx_v_XPOS, __pyx_v_YPOS, __pyx_v_reduced, __pyx_v_sigma, __pyx_v_wt1, __pyx_v_tsys, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __pyx_f_13convolve_dump_convolve_dump(__pyx_v_biased, __pyx_v_sigmaweight, __pyx_v_tsysweight, __pyx_v_RMAX, __pyx_v_crval2, __pyx_v_crval3, __pyx_v_weights, __pyx_v_naxes0, __pyx_v_naxes1, __pyx_v_naxes2, __pyx_v_theta_n, __pyx_v_nhorns, __pyx_v_nchan, __pyx_v_fsky, __pyx_v_idmp, __pyx_v_XPOS, __pyx_v_YPOS, __pyx_v_reduced, __pyx_v_sigma, __pyx_v_wt1, __pyx_v_tsys, 0); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -5563,7 +5552,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_crval3, __pyx_k_crval3, sizeof(__pyx_k_crval3), 0, 0, 1, 1},
   {&__pyx_n_s_end, __pyx_k_end, sizeof(__pyx_k_end), 0, 0, 1, 1},
   {&__pyx_n_s_file, __pyx_k_file, sizeof(__pyx_k_file), 0, 0, 1, 1},
-  {&__pyx_n_s_filename, __pyx_k_filename, sizeof(__pyx_k_filename), 0, 0, 1, 1},
   {&__pyx_n_s_fsky, __pyx_k_fsky, sizeof(__pyx_k_fsky), 0, 0, 1, 1},
   {&__pyx_n_s_idmp, __pyx_k_idmp, sizeof(__pyx_k_idmp), 0, 0, 1, 1},
   {&__pyx_n_s_import, __pyx_k_import, sizeof(__pyx_k_import), 0, 0, 1, 1},
