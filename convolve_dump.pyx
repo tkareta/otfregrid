@@ -6,8 +6,8 @@ import time
 
 @cython.boundscheck(False)
 @cython.wraparound(False)
-cpdef convolve_cy(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):
-    
+cpdef convolve_dump(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):
+    print "starting a loop through a data dump"
     #filename = LMTOTFNetCDFFile(filename)
 
     cpdef numpy.ndarray[double, ndim=1] T

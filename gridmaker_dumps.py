@@ -1,10 +1,10 @@
 import numpy
-from multiprocessing import Pool
+from multiprocessing import Pool, cpu_count
 
 from otfregrid import convolve_mp
 from otfregrid import LMTOTFRegrid_mp
 from file_compatibility.LMTOTFFile import LMTOTFNetCDFFile
-from convolve_cy import convolve_cy
+from convolve_dump import convolve_dump
 
 # this version of gridmaker is designed to handle a large-ish (1-30?)
 # filelist and make a grid using multiprocessing on one computer.
@@ -17,7 +17,8 @@ def gridmaker_1c(xmin, xmax, ymin, ymax, filelist, cython=True):
     #g = LMTOTFRegrid_mp(xmin, xmax, ymin, ymax, filelist)
     initialize_regrid(xmin, xmax, ymin, ymax, filelist)
     print "Starting Grid Making Process..."
-    p = Pool(4)
+    
+    p = Pool(cpu_count)
     if (cython==True):
         for i in range(len(g.filelist)):
             filename = LMTOTFNetCDFFile(g.filelist[i])
@@ -35,9 +36,10 @@ def gridmaker_1c(xmin, xmax, ymin, ymax, filelist, cython=True):
             else:
                 wt1 = 1.0
             
-            print "number of dumps: ", filename.hdu.header.nsample - 2
-            for idmp in range(len(filename.hdu.header.nsample - 2)):
-                p.apply_async(convolve_wrapper_dump, args=(g.biased, g.sigmaweight, g.tsysweight, g.RMAX, g.crval2, g.crval3, g.weights, g.naxes0, g.naxes1, g.naxes2, g.theta_n, g.nhorns, g.nchan, filename.hdu.header.fsky, idmp, filename.hdu.data.XPOS, filename.hdu.data.YPOS, filename.hdu.data.reduced, filename.hdu.data.sigma, wt1, filename.hdu.header.tsys), callback = callback_update)
+            print "number of dumps: ", filename.hdu.header.nsample - 2, " in file ", g.filelist[i]
+            for idmp in range(filename.hdu.header.nsample - 2):
+                print idmp
+                p.apply_async(convolve_wrapper_dump, args=(g.biased, g.sigmaweight, g.tsysweight, g.RMAX, g.crval2, g.crval3, g.weights, g.naxes0, g.naxes1, g.naxes2, g.theta_n, filename.hdu.header.nhorns, g.nchan, filename.hdu.header.fsky, idmp, filename.hdu.data.XPOS, filename.hdu.data.YPOS, filename.hdu.data.reduced, filename.hdu.data.sigma, wt1, filename.hdu.header.tsys), callback = callback_update)
     if (cython==False):
         for i in range(len(g.filelist)):
             p.apply_async(convolve_wrapper, args=(g.filelist[i], g.biased, g.sigmaweight, g.tsysweight, g.RMAX, g.crval2, g.crval3, g.weights, g.naxes0, g.naxes1, g.naxes2, g.theta_n,), callback = callback_update)
@@ -68,19 +70,20 @@ def convolve_wrapper(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crva
     #g.TSYS += tsys
     return (t, wt, tsys)
 
-def convolve_wrapper_dump(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights, naxes0, naxes1, naxes2, theta_n):
+def convolve_wrapper_dump(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):
     #global g
-    t, wt, tsys = convolve_cy(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights, naxes0, naxes1, naxes2, theta_n)
+    print "convolve wrapper dump"
+    result = convolve_dump(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys)
     #g.T += t
     #g.WT += wt
     #g.TSYS += tsys
-    return (t, wt, tsys)
+    return result
 
 
 
 
 if __name__ == "__main__":
-    files = ['35065305.nc','35065304.nc','35065306.nc','35065300.nc','35065301.nc','35065302.nc','35065303.nc','35065307.nc','35065308.nc','35065309.nc']
+    files = ['35065305.nc']#,'35065304.nc','35065306.nc','35065300.nc','35065301.nc','35065302.nc','35065303.nc','35065307.nc','35065308.nc','35065309.nc']
     grid = gridmaker_1c(525.0,535.0,645.0,655.0, files)
     
     
