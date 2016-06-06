@@ -18,8 +18,9 @@ def gridmaker_1c(xmin, xmax, ymin, ymax, filelist, cython=True):
     initialize_regrid(xmin, xmax, ymin, ymax, filelist)
     print "Starting Grid Making Process..."
     
-    p = Pool(cpu_count)
+    p = Pool(cpu_count())
     if (cython==True):
+        print "number of files = ", len(g.filelist)
         for i in range(len(g.filelist)):
             filename = LMTOTFNetCDFFile(g.filelist[i])
             filename._reduce_data(g.biased)
@@ -38,8 +39,9 @@ def gridmaker_1c(xmin, xmax, ymin, ymax, filelist, cython=True):
             
             print "number of dumps: ", filename.hdu.header.nsample - 2, " in file ", g.filelist[i]
             for idmp in range(filename.hdu.header.nsample - 2):
-                print idmp
+                #print idmp
                 p.apply_async(convolve_wrapper_dump, args=(g.biased, g.sigmaweight, g.tsysweight, g.RMAX, g.crval2, g.crval3, g.weights, g.naxes0, g.naxes1, g.naxes2, g.theta_n, filename.hdu.header.nhorns, g.nchan, filename.hdu.header.fsky, idmp, filename.hdu.data.XPOS, filename.hdu.data.YPOS, filename.hdu.data.reduced, filename.hdu.data.sigma, wt1, filename.hdu.header.tsys), callback = callback_update)
+                #print "process added to Pool"
     if (cython==False):
         for i in range(len(g.filelist)):
             p.apply_async(convolve_wrapper, args=(g.filelist[i], g.biased, g.sigmaweight, g.tsysweight, g.RMAX, g.crval2, g.crval3, g.weights, g.naxes0, g.naxes1, g.naxes2, g.theta_n,), callback = callback_update)
@@ -61,6 +63,7 @@ def callback_update(results):
     g.T += results[0]
     g.WT += results[1]
     g.TSYS += results[2]
+    #print results[0]
 
 def convolve_wrapper(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights, naxes0, naxes1, naxes2, theta_n):
     #global g
@@ -73,11 +76,11 @@ def convolve_wrapper(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crva
 def convolve_wrapper_dump(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):
     #global g
     print "convolve wrapper dump"
-    result = convolve_dump(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys)
+    t, wt, tsys = convolve_dump(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys)
     #g.T += t
     #g.WT += wt
     #g.TSYS += tsys
-    return result
+    return (t, wt, tsys)
 
 
 
