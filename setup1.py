@@ -2,5 +2,5 @@ from distutils.core import setup
 from Cython.Build import cythonize
 
 setup(
-    ext_modules = cythonize("convolve_cy.pyx")
+    ext_modules = cythonize("convolve_dump.pyx")
 )
