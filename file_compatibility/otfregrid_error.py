@@ -17,7 +17,7 @@ class otfregridfileerror(Error):
         self.message = errorname
         self.message += ": "
         self.message += reason
-        self.str()
+        self.__str__()
         
     def __str__(self):
         return self.message
