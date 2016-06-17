@@ -4,10 +4,8 @@ from multiprocessing import Pool, cpu_count
 from otfregrid import convolve_mp
 from otfregrid import LMTOTFRegrid_mp
 from file_compatibility.LMTOTFFile import LMTOTFNetCDFFile
-if (numpy.__version__=="1.6.1"):
-    from convolve_dump_161 import convolve_dump
-else:
-    from convolve_dump import convolve_dump
+print "If importing 'convolve_dump' fails, compile the Cython module on your system as the wiki describes"
+from convolve_dump import convolve_dump
 
 # this version of gridmaker is designed to handle a large-ish (1-30?)
 # filelist and make a grid using multiprocessing on one computer.
