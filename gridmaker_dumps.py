@@ -12,7 +12,7 @@ from convolve_dump import convolve_dump
 # As it stands currently, it can process approximately 4 files per 12
 # minute increment.
 
-def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, cython=True):
+def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, cython=True, normalize=True):
     ### going to move the 'make_grid' function outside of the class
     ### for multiprocessing purposes? we'll see if it works
     #g = LMTOTFRegrid_mp(xmin, xmax, ymin, ymax, filelist)
@@ -48,13 +48,23 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, cython=True):
             p.apply_async(convolve_wrapper, args=(g.filelist[i], g.biased, g.sigmaweight, g.tsysweight, g.RMAX, g.crval2, g.crval3, g.weights, g.naxes0, g.naxes1, g.naxes2, g.theta_n,), callback = callback_update)
     p.close()
     p.join()
-    g.normalize_grid()
-    g.T = g.T.reshape((g.naxes2, g.naxes1, g.naxes0))
-    print "Grid normalized and reshaped!"
-    print "The median value of the grid is:"
-    print g.T.var()**.5
-    g.create_netcdf()
+    if (normalize==True):
+        g.normalize_grid()
+        g.T = g.T.reshape((g.naxes2, g.naxes1, g.naxes0))
+        print "Grid normalized and reshaped!"
+        print "The stdev value of the grid is:"
+        print g.T.var()**.5
+        g.create_netcdf()
+    if (normalize==False):
+        print "Assuming the filelist was delegated to multiple computers:"
+        file0 = filelist[0]
+        filenew = file0.strip(".nc")+".npy"
+        print "The T, WT, and TSYS arrays are stored in that order in the file:"
+        print filenew
+        numpy.savez(filenew, g.T, g.WT, g.TSYS)
+        
     
+####
 def initialize_regrid(xmin, xmax, ymin, ymax, filelist):
     global g
     g = LMTOTFRegrid_mp(xmin, xmax, ymin, ymax, filelist)
