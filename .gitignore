@@ -3,3 +3,4 @@
 **/build
 **/dist
 **/otfregrid.egg-info
+*.so
