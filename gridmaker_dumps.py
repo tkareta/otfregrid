@@ -58,7 +58,7 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, cython=True, normalize=Tru
     if (normalize==False):
         print "Assuming the filelist was delegated to multiple computers:"
         file0 = filelist[0]
-        filenew = file0.strip(".nc")+".npy"
+        filenew = file0.strip(".nc")
         print "The T, WT, and TSYS arrays are stored in that order in the file:"
         print filenew
         numpy.savez(filenew, g.T, g.WT, g.TSYS)

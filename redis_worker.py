@@ -6,6 +6,7 @@ wq = WorkQueue('otfworkq', redishost='cln.astro.umass.edu')
 
 while (wq.queue_length() > 0):
     filename = wq.get_item()
+    filename = "test_data/"+filename
     filelist = [filename]
 
     gridmaker_dumps(525.0,535.0, 645.0, 655.0, filelist, normalize=False)

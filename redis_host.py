@@ -7,7 +7,7 @@ def otfredishost(filelist):
     for i in range(len(filelist)):
         wq.add_item(filelist[i])
     print "Number of Files: ", len(filelist)
-    print "Initial Length of WorkQueue", WorkQueueManager.queue_length()
+    print "Initial Length of WorkQueue", wq.queue_length()
     
 
 
