@@ -144,6 +144,6 @@ cpdef convolve_dump(biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights
                                 T[jj + k] += (wt*reduced[idmp, ih, k])
     time2 = time.time()
     print "took", (time2-time1), "seconds for this data dump"
-    return T, WT, TSYS
+    return T, WT, TSYS, MAX_WT
 
     

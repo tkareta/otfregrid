@@ -1,17 +1,20 @@
 import numpy
 from netCDF4 import Dataset, Variable
 
-def redis_normalization(filelist, naxes2, naxes1, naxes0, MAX_WT=temp):
+def redis_normalization(filelist, naxes2, naxes1, naxes0):
     print "grabbing .npz files to reconstruct the OTF map"
     for i in range(len(filelist)):
         temp_file = fileist[i]
         filename = temp_file.strip(".nc")+".npz"
         array_load = numpy.load(filename)
+        if (i==0):
+            MAX_WT = array_load[3]
+        else:
+            MAX_WT = numpy.maximum(MAX_WT, array_load[3])
         T += array_load[0]
         WT += array_load[1]
         TSYS += array_load[2]
-    if (MAX_WT == temp):
-        MAX_WT = (T * 0.0) + 1.0
+
     print "files all loaded, starting grid normalization"
     for iy in range(int(naxes2)):
         for ix in range(int(naxes1)):
@@ -48,6 +51,8 @@ def create_netcdf(filelist, T, WT, TSYS, naxes0, naxes1, naxes2):
 
     var3 = newfile.createVariable('TSYS', numpy.dtype(numpy.float32), (('naxes2', 'naxes1')))
     var3[:] = TSYS
+    
+    var4 = newfile.createVariable('MAX_WT', numpy.dtype(numpy.float32), (('naxes2', 'naxes1')))
     
     newfile.close()
     

@@ -2976,7 +2976,7 @@ static PyObject *__pyx_f_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *_
  *                                 T[jj + k] += (wt*reduced[idmp, ih, k])
  *     time2 = time.time()             # <<<<<<<<<<<<<<
  *     print "took", (time2-time1), "seconds for this data dump"
- *     return T, WT, TSYS
+ *     return T, WT, TSYS, MAX_WT
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_time); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -3008,7 +3008,7 @@ static PyObject *__pyx_f_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *_
  *                                 T[jj + k] += (wt*reduced[idmp, ih, k])
  *     time2 = time.time()
  *     print "took", (time2-time1), "seconds for this data dump"             # <<<<<<<<<<<<<<
- *     return T, WT, TSYS
+ *     return T, WT, TSYS, MAX_WT
  * 
  */
   __pyx_t_5 = PyNumber_Subtract(__pyx_v_time2, __pyx_v_time1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3030,12 +3030,12 @@ static PyObject *__pyx_f_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *_
   /* "convolve_dump.pyx":147
  *     time2 = time.time()
  *     print "took", (time2-time1), "seconds for this data dump"
- *     return T, WT, TSYS             # <<<<<<<<<<<<<<
+ *     return T, WT, TSYS, MAX_WT             # <<<<<<<<<<<<<<
  * 
  * 
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_3 = PyTuple_New(3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = PyTuple_New(4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_INCREF(((PyObject *)__pyx_v_T));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_T));
@@ -3046,6 +3046,9 @@ static PyObject *__pyx_f_13convolve_dump_convolve_dump(CYTHON_UNUSED PyObject *_
   __Pyx_INCREF(((PyObject *)__pyx_v_TSYS));
   __Pyx_GIVEREF(((PyObject *)__pyx_v_TSYS));
   PyTuple_SET_ITEM(__pyx_t_3, 2, ((PyObject *)__pyx_v_TSYS));
+  __Pyx_INCREF(((PyObject *)__pyx_v_MAX_WT));
+  __Pyx_GIVEREF(((PyObject *)__pyx_v_MAX_WT));
+  PyTuple_SET_ITEM(__pyx_t_3, 3, ((PyObject *)__pyx_v_MAX_WT));
   __pyx_r = __pyx_t_3;
   __pyx_t_3 = 0;
   goto __pyx_L0;

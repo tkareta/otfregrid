@@ -61,7 +61,7 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, cython=True, normalize=Tru
         filenew = file0.strip(".nc")
         print "The T, WT, and TSYS arrays are stored in that order in the file:"
         print filenew
-        numpy.savez(filenew, g.T, g.WT, g.TSYS)
+        numpy.savez(filenew, g.T, g.WT, g.TSYS, g.MAX_WT)
         
     
 ####
@@ -72,8 +72,10 @@ def initialize_regrid(xmin, xmax, ymin, ymax, filelist):
 def callback_update(results):
     global g
     g.T += results[0]
+    print results[0]
     g.WT += results[1]
     g.TSYS += results[2]
+    g.MAX_WT = numpy.maximum(g.MAX_WT, results[3])
     #print results[0]
 
 def convolve_wrapper(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights, naxes0, naxes1, naxes2, theta_n):
@@ -87,11 +89,11 @@ def convolve_wrapper(filename, biased, sigmaweight,tsysweight,RMAX, crval2, crva
 def convolve_wrapper_dump(biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys):
     #global g
     #print "convolve wrapper dump"
-    t, wt, tsys = convolve_dump(biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys)
+    t, wt, tsys, max_wt = convolve_dump(biased, sigmaweight,tsysweight,RMAX, crval2, crval3, weights,  naxes0,  naxes1, naxes2, theta_n, nhorns, nchan, fsky, idmp, XPOS, YPOS, reduced, sigma, wt1, tsys)
     #g.T += t
     #g.WT += wt
     #g.TSYS += tsys
-    return (t, wt, tsys)
+    return (t, wt, tsys, max_wt)
 
 
 
