@@ -61,7 +61,7 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, cython=True, normalize=Tru
         filenew = file0.strip(".nc")
         print "The T, WT, and TSYS arrays are stored in that order in the file:"
         print filenew
-        naxes = numpy.array([g.naxes2, g.naxes1, g.naxes])
+        naxes = numpy.array([g.naxes2, g.naxes1, g.naxes0])
         numpy.savez(filenew, g.T, g.WT, g.TSYS, g.MAX_WT, naxes)
         
     
