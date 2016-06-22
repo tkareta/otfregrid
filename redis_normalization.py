@@ -1,7 +1,7 @@
 import numpy
 from netCDF4 import Dataset, Variable
 
-def redis_normalization(filelist, naxes2, naxes1, naxes0):
+def redis_normalization(filelist):
     print "grabbing .npz files to reconstruct the OTF map"
     for i in range(len(filelist)):
         temp_file = fileist[i]
@@ -14,6 +14,10 @@ def redis_normalization(filelist, naxes2, naxes1, naxes0):
         T += array_load[0]
         WT += array_load[1]
         TSYS += array_load[2]
+        naxes = array_load[3]
+        naxes2 = naxes[0]
+        naxes1 = naxes[1]
+        naxes0 = naxes[2]
 
     print "files all loaded, starting grid normalization"
     for iy in range(int(naxes2)):

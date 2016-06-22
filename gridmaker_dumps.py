@@ -61,7 +61,8 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, cython=True, normalize=Tru
         filenew = file0.strip(".nc")
         print "The T, WT, and TSYS arrays are stored in that order in the file:"
         print filenew
-        numpy.savez(filenew, g.T, g.WT, g.TSYS, g.MAX_WT)
+        naxes = numpy.array([g.naxes2, g.naxes1, g.naxes])
+        numpy.savez(filenew, g.T, g.WT, g.TSYS, g.MAX_WT, naxes)
         
     
 ####
@@ -72,7 +73,7 @@ def initialize_regrid(xmin, xmax, ymin, ymax, filelist):
 def callback_update(results):
     global g
     g.T += results[0]
-    print results[0]
+    #print results[0]
     g.WT += results[1]
     g.TSYS += results[2]
     g.MAX_WT = numpy.maximum(g.MAX_WT, results[3])
