@@ -4,3 +4,4 @@
 **/dist
 **/otfregrid.egg-info
 *.so
+*.npz
