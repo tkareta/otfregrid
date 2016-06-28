@@ -12,10 +12,16 @@ from convolve_dump import convolve_dump
 # As it stands currently, it can process approximately 4 files per 12
 # minute increment.
 
-def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, cython=True, normalize=True):
+def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, dataloc="null", writeloc="null",cython=True, normalize=True):
     ### going to move the 'make_grid' function outside of the class
     ### for multiprocessing purposes? we'll see if it works
     #g = LMTOTFRegrid_mp(xmin, xmax, ymin, ymax, filelist)
+
+    if(writeloc=="null"):
+        print "Assuming that all needed files are in local directory"
+    else:
+        for i in range(len(filelist)):
+            filelist[i] = dataloc+filelist[i] #this pre-appends the location of the data
     initialize_regrid(xmin, xmax, ymin, ymax, filelist)
     print "Starting Grid Making Process..."
     
@@ -57,12 +63,16 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, cython=True, normalize=Tru
         g.create_netcdf()
     if (normalize==False):
         print "Assuming the filelist was delegated to multiple computers:"
-        file0 = filelist[0]
-        filenew = file0.strip(".nc")
-        print "The T, WT, and TSYS arrays are stored in that order in the file:"
-        print filenew
-        naxes = numpy.array([g.naxes2, g.naxes1, g.naxes0])
-        numpy.savez(filenew, g.T, g.WT, g.TSYS, g.MAX_WT, naxes)
+        if ((writeloc == "null")or(dataloc == "null")):
+            print "Need to know where the file is to be written!"
+        else:
+            file0 = filelist[0]
+            file0 = file0[(len(file0)-len(dataloc)):len(file0)]
+            filenew = file0.strip(".nc")
+            print "The T, WT, and TSYS arrays are stored in that order in the file:"
+            print writeloc+filenew
+            naxes = numpy.array([g.naxes2, g.naxes1, g.naxes0])
+            numpy.savez(writeloc+filenew, g.T, g.WT, g.TSYS, g.MAX_WT, naxes)
         
     
 ####
