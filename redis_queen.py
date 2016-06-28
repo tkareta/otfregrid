@@ -25,6 +25,7 @@ def redisqueenbee(filelist):
             if(wq.queue_length() == 0):
                 print "queue finished!"
                 redis_normalization(filelist, '/archives/fcrao/otfdataout/')
+                continuing = False
                 
             else:
                 "unacknowledged items re-added"

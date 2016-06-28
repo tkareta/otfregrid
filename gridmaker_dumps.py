@@ -67,7 +67,8 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, dataloc="null", writeloc="
             print "Need to know where the file is to be written!"
         else:
             file0 = filelist[0]
-            file0 = filelist[len(writeloc):len(file0)]
+            print file0
+            file0 = file0[len(writeloc):len(file0)]
             filenew = file0.strip(".nc")
             print "The T, WT, TSYS, MAX_WT and naxes arrays are stored in that order in the file:"
             print writeloc+filenew
