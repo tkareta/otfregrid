@@ -1,4 +1,5 @@
 from redisworkq import WorkQueueManager
+from redis_normalization import redis_normalization
 from time import sleep
 
 def redisqueenbee(filelist):
@@ -16,13 +17,14 @@ def redisqueenbee(filelist):
         sleep(5*60) #sleep for 60 seconds
         if (wq.queue_length() > 0):
             continuing = True
-            print "files still available to be grabbed"
+            print wq.queue_length()," files still available to be processed"
         if (wq.queue_length() == 0):
             for item in wq.working_item_iterator():
                 wq.fail_item_with_requeue()
+            
             if(wq.queue_length() == 0):
                 print "queue finished!"
-                redis_normalization(filelist, '/archives/fcrao/otfdataout/'
+                redis_normalization(filelist, '/archives/fcrao/otfdataout/')
                 
             else:
                 "unacknowledged items re-added"

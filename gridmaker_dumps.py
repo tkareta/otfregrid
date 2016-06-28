@@ -16,7 +16,7 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, dataloc="null", writeloc="
     ### going to move the 'make_grid' function outside of the class
     ### for multiprocessing purposes? we'll see if it works
     #g = LMTOTFRegrid_mp(xmin, xmax, ymin, ymax, filelist)
-
+    backupfilelist = filelist
     if(writeloc=="null"):
         print "Assuming that all needed files are in local directory!"
     else:
@@ -66,10 +66,9 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, dataloc="null", writeloc="
         if ((writeloc == "null")or(dataloc == "null")):
             print "Need to know where the file is to be written!"
         else:
-            file0 = filelist[0]
-            file0 = file0[(len(file0)-len(dataloc)):len(file0)]
+            file0 = backupfilelist[0]
             filenew = file0.strip(".nc")
-            print "The T, WT, and TSYS arrays are stored in that order in the file:"
+            print "The T, WT, TSYS, MAX_WT and naxes arrays are stored in that order in the file:"
             print writeloc+filenew
             naxes = numpy.array([g.naxes2, g.naxes1, g.naxes0])
             numpy.savez(writeloc+filenew, g.T, g.WT, g.TSYS, g.MAX_WT, naxes)

@@ -21,3 +21,6 @@ def redisworkerbee(user, dataloc='null', writeloc='null'):
 
         print "if this prints, ", filename," was probably completed"
         wq.ack_item()
+
+if __name__=="__main__":
+    redisworkerbee(user=2)
