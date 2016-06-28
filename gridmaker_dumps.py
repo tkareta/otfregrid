@@ -18,7 +18,7 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, dataloc="null", writeloc="
     #g = LMTOTFRegrid_mp(xmin, xmax, ymin, ymax, filelist)
 
     if(writeloc=="null"):
-        print "Assuming that all needed files are in local directory"
+        print "Assuming that all needed files are in local directory!"
     else:
         for i in range(len(filelist)):
             filelist[i] = dataloc+filelist[i] #this pre-appends the location of the data

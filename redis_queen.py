@@ -9,6 +9,7 @@ def redisqueenbee(filelist):
     for i in range(len(filelist)):
         wq.add_item(filelist[i])
     print "Number of Files: ", len(filelist)
+    
     print "Initial Length of WorkQueue", wq.queue_length()
     continuing = True
     while (continuing):
@@ -20,7 +21,9 @@ def redisqueenbee(filelist):
             for item in wq.working_item_iterator():
                 wq.fail_item_with_requeue()
             if(wq.queue_length() == 0):
-                print "queue finished"
+                print "queue finished!"
+                redis_normalization(filelist, '/archives/fcrao/otfdataout/'
+                
             else:
                 "unacknowledged items re-added"
             

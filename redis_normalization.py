@@ -1,11 +1,11 @@
 import numpy
 from netCDF4 import Dataset, Variable
 
-def redis_normalization(filelist):
+def redis_normalization(filelist, writeloc):
     print "grabbing .npz files to reconstruct the OTF map"
     for i in range(len(filelist)):
         temp_file = filelist[i]
-        filename = temp_file.strip(".nc")+".npz"
+        filename = writeloc+temp_file.strip(".nc")+".npz"
         array_load = numpy.load(filename)
         if (i==0):
             MAX_WT = array_load[3]
