@@ -4,7 +4,7 @@ from netCDF4 import Dataset, Variable
 def redis_normalization(filelist):
     print "grabbing .npz files to reconstruct the OTF map"
     for i in range(len(filelist)):
-        temp_file = fileist[i]
+        temp_file = filelist[i]
         filename = temp_file.strip(".nc")+".npz"
         array_load = numpy.load(filename)
         if (i==0):
