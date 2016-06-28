@@ -5,7 +5,9 @@ def redis_normalization(filelist, writeloc):
     print "grabbing .npz files to reconstruct the OTF map"
     for i in range(len(filelist)):
         temp_file = filelist[i]
-        filename = writeloc+temp_file.strip(".nc")+".npz"
+        temp_file = tempfile.strip(".nc")
+        tempfile = tempfile+".npz"
+        filename = writeloc + tempfile
         array_load = numpy.load(filename)
         if (i==0):
             MAX_WT = array_load[3]
