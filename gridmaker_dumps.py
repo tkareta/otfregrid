@@ -78,7 +78,7 @@ def gridmaker_dumps(xmin, xmax, ymin, ymax, filelist, dataloc="null", writeloc="
     
 ####
 def initialize_regrid(xmin, xmax, ymin, ymax, filelist):
-    #global g
+    global g
     g = LMTOTFRegrid_mp(xmin, xmax, ymin, ymax, filelist)
     return g
 
