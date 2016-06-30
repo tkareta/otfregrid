@@ -1,5 +1,6 @@
 import numpy
 from netCDF4 import Dataset, Variable
+import os
 
 def redis_normalization(filelist, writeloc):
     print "grabbing .npz files to reconstruct the OTF map"
@@ -53,6 +54,10 @@ def create_netcdf(filelist, T, WT, TSYS, naxes0, naxes1, naxes2, writeloc):
     else:
         newfilename = newfilename+"_largegrid.nc"
     newfilename = writeloc + newfilename
+    if (os.path.exists(newfilename)):
+        os.unlink(newfilename)
+        print "Deleting pre-existing grid."
+
     newfile = Dataset(newfilename, mode='w', clobber=True)
     newfile.createDimension('naxes0', naxes0)
     newfile.createDimension('naxes1', naxes1)
